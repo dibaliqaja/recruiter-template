@@ -218,6 +218,7 @@ $(window).on("load", function () {
 
     $(".not-box-open").on("click", function () {
         $("#message").hide();
+        $("#group-menu").hide();
         $(".user-account-settingss").hide();
         $(this).next("#notification").toggle();
     });
@@ -226,8 +227,18 @@ $(window).on("load", function () {
 
     $(".not-box-openm").on("click", function () {
         $("#notification").hide();
+        $("#group-menu").hide();
         $(".user-account-settingss").hide();
         $(this).next("#message").toggle();
+    });
+
+    //  ============ Group Menu Open =============
+
+    $(".not-box-openg").on("click", function () {
+        $("#message").hide();
+        $("#notification").hide();
+        $(".user-account-settingss").hide();
+        $(this).next("#group-menu").toggle();
     });
 
 
