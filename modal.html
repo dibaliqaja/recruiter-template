@@ -1,0 +1,4190 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>Recruiter Template</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="description" content="" />
+	<meta name="keywords" content="" />
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/line-awesome/css/line-awesome.min.css">
+	<link rel="stylesheet" type="text/css" href="vendor/fontawesome-free/css/all.min.css" >
+	<link rel="stylesheet" type="text/css" href="lib/slick/slick.css">
+	<link rel="stylesheet" type="text/css" href="lib/slick/slick-theme.css">
+	<link rel="stylesheet" type="text/css" href="css/style.css">
+	<link rel="stylesheet" type="text/css" href="css/responsive.css">
+</head>
+
+<body>		
+
+<!-- Button trigger modal -->
+<button type="button" data-target="#virtins" class="btn btn-primary btn-lg" data-toggle="modal" >Launch demo modal</button>
+
+	<!-- Modal Profesional on Insert -->
+	<div class="modal fade" id="profins" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="post" action="actprofins" enctype="multipart/form-data">
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Profession or Employment</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs">
+								<li class="nav-item"><a class="nav-link active" id="profins_l1" data-toggle="tab" href="#profins_t1" role="tab" aria-controls="profins_t1" aria-selected="true">CV Builder</a></li>
+								<li><a class="nav-link" id="profins_l2" data-toggle="tab" href="#profins_t2" role="tab" aria-controls="profins_t2" aria-selected="true">Job Desc</a></li>
+								<li><a class="nav-link" id="profins_l3" data-toggle="tab" href="#profins_t3" role="tab" aria-controls="profins_t3" aria-selected="true">Publication</a></li>
+								<li><a class="nav-link" id="profins_l4" data-toggle="tab" href="#profins_t4" role="tab" aria-controls="profins_t4" aria-selected="true">Organization</a></li>
+								<li><a class="nav-link" id="profins_l5" data-toggle="tab" href="#profins_t5" role="tab" aria-controls="profins_t5" aria-selected="true">Employment</a></li>
+								<li><a class="nav-link" id="profins_l6" data-toggle="tab" href="#profins_t6" role="tab" aria-controls="profins_t6" aria-selected="true">Remuneration</a></li>
+							</ul>
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div id="profins_t1" class="tab-pane fade show active" role="tabpanel" aria-labelledby="profins_l1">
+									<!-- @csrf -->
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group">
+												<label>CV Builder Type</label>
+												<select class="form-control mt-2" name="cvBuilderType">
+													<option>Select</option>
+													@foreach($dropdownlist['cvbuildtyp'] as $x)
+														<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+													@endforeach
+												</select>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label>Industry or Organization Type</label>
+												<select class="form-control mt-2" name="industryType">
+													<option>Select</option>
+													@foreach($dropdownlist['orgtyp'] as $x)
+														<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+													@endforeach
+												</select>
+											</div>										
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label>Job Family</label>
+												<select class="form-control mt-2" name="jobFamily">
+													<option>Select Job Family</option>
+													@foreach($dropdownlist['jobfam'] as $x)
+														<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+													@endforeach
+												</select>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<p>Upload your CV doc or pdf</p>
+												<input type="file" name="fcv" class="form-control-file mt-2">
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<p>Profile</p>
+												<input type="file" name="pcv" class="form-control-file mt-2">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="profins_t2" class="tab-pane fade"  role="tabpanel" aria-labelledby="profins_l2">
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<p>Organization Structure</p>
+												<select class="form-control mt-2" name="organizationStructure">
+													<option>Select</option>
+													@foreach($dropdownlist['orgstruct'] as $x)
+														<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+													@endforeach
+												</select>
+											</div>
+											<div class="form-group">
+												<p>Role Specialization</p>
+												<input class="form-control mt-2" name="roleSpecialization" placeholder="Corporate Financing">
+												@error('roleSpecialization') <small class="text-danger">{{ $message }}</small> @enderror
+											</div>
+											<div class="form-group">
+												<p>Number of Subordinate</p>
+												<input class="form-control mt-2" placeholder="7" name="numberSubordinate">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<p>Job Title</p>
+												<select class="form-control mt-2" name="jobTitle">
+													<option value="">Select</option>
+													@foreach($dropdownlist['jobtit'] as $x)
+														<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+													@endforeach
+												</select>
+											</div>
+											<div class="form-group">
+												<p>Position Layer Hiearchy</p>
+												<select class="form-control mt-2" name="positionLayer">
+													<option value="staff">Pilhi</option>
+													@foreach($dropdownlist['poslay'] as $x)
+														<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+													@endforeach
+												</select>
+											</div>
+
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group ">
+												<label class="control-label " for="date">
+													Start Date :
+												</label>
+												<input class="form-control mt-2" id="date" name="date" type="date" />
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group ">
+												<label class="control-label " for="date">
+													Last Date :
+												</label>
+												<input class="form-control mt-2" id="date" name="lastDate" type="date" />
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<p>Field of Study:</p>
+											<input class="form-control mt-2" name="fieldStudy" placeholder="Computer Science">
+										</div>
+										<div class="col-sm-6">
+											<p>Subject Matter:</p>
+											<input class="form-control mt-2" name="subjectMaster" placeholder="Articial Intelegence">
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<br>
+											<p>Position Role/Duties/Responsibilities:</p>
+											<textarea name="positionRole" class="form-control mt-2 mb-3" id="comment"
+												placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed iste dignissimos distinctio recusandae magni nulla, eos laudantium minima, ullam veniam deleniti odio."></textarea>
+										</div>
+									</div>
+								</div>
+								<div id="profins_t3" class="tab-pane fade" role="tabpanel" aria-labelledby="profins_l3">
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<p>Jurnal or Publication</p>
+												<input class="form-control mt-2" name="jurnalPublication" placeholder="Network Review Herald">
+											</div>
+											<div class="form-group">
+												<p>Role on the Journal or Publication</p>
+												<input class="form-control mt-2" name="roleJurnalPublication"
+													placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit.">
+											</div>
+											<div class="form-group">
+												<p>Field of Study</p>
+												<textarea class="form-control mt-2" rows="5" id="comment" name="fieldOfStudy"
+													placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed iste dignissimos distinctio recusandae magni nulla, eos laudantium minima, ullam veniam deleniti odio."></textarea>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<p>Jurnal Title</p>
+												<input class="form-control mt-2" name="jurnalTitle" placeholder="Network Review Herald">
+											</div>
+											<div class="form-group">
+												<p>Other Contributors to Credit</p>
+												<input class="form-control mt-2" name="otherContribution" placeholder="Network Review Herald">
+											</div>
+											<div class="form-group">
+												<p>Subject Matter</p>
+												<textarea class="form-control mt-2" name="subjectMatter" rows="5" id="comment"
+													placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed iste dignissimos distinctio recusandae magni nulla, eos laudantium minima, ullam veniam deleniti odio."></textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="profins_t4" class="tab-pane fade" role="tabpanel" aria-labelledby="profins_l4">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Organization Name:</p>
+												<select name="organizationName" class="form-control mt-2 selectcomplete">
+												</select>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<p>Number and Street Name:</p>
+												<input class="form-control mt-2" placeholder="Kav 11, Jl. Jend Sudirman" name="numberStreet">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<p>Name of Community or Building</p>
+												<input class="form-control mt-2" placeholder="OKADA Office Park" name="nameComunity">
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<div class="form-group">
+												<p>RT/RW</p>
+												<input class="form-control mt-2" placeholder="04/05" name="rtrw">
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<div class="form-group">
+												<p>Zip Code:</p>
+												<input class="form-control mt-2" name="zipCode" placeholder="17213">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<p>Country:</p>
+												<Select class="form-control mt-2 selectcountry" onchange="getprovince(this.value)" name="country">
+												</select>
+											</div>
+										</div>
+										<div class="col-sm-6" >
+											<div class="form-group">
+												<p>Province:</p>
+												<Select class="form-control mt-2 selectprovince" onchange="getdistrict(this.value)" name="province" >
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<p>District:</p>
+												<select class="form-control mt-2 selectdistrict" onchange="getcity(this.value)" name="district" >
+												</select>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<p>City:</p>
+												<Select class="form-control mt-2 selectcity" name="city" >
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="profins_t5" class="tab-pane fade" role="tabpanel" aria-labelledby="profins_l5" >
+									<div class="row">
+										<div class="col-md-12">
+											<p>Employment Type</p>
+											<select class="form-control mt-2" name="employmentType" id="sel1">
+												<option value="">Select</option>
+												@foreach($dropdownlist['emptyp'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<p class="control-label " for="date">
+													Start Date :
+												</p>
+												<input class="form-control mt-2" id="date" name="dateMenu5" type="date" />
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group ">
+												<p class="control-label " for="date">
+													End Date :
+												</p>
+												<input class="form-control mt-2" id="date" name="lastDateMenu5" type="date" />
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<h3 class="text-danger"><br>WHAT IF CONDITION => if Last Date is prior to
+												Today's Date</h3>
+											<select class="form-control mt-2" id="sel1" name="kerjaan">
+												<option value="">Select</option>
+												@foreach($dropdownlist['emptyp'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Contact Reference Name:</p>
+												<input class="form-control mt-2" name="contactReferenceName" placeholder="Karl-Henrik Johansson">
+											</div>
+											<div class="form-group">
+												<p>Contact Email Address:</p>
+												<input class="form-control mt-2" name="contactEmailAddress" placeholder="mark@gmail.com">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Contact Company or Organization Name:</p>
+												<input class="form-control mt-2" name="contactCompanyOrganization" placeholder="Scheepholment Technologies">
+											</div>
+											<div class="form-group">
+												<p>Contact Phone:</p>
+												<input class="form-control mt-2" name="contactPhone" placeholder="+62 881 222 4848">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="profins_t6" class="tab-pane fade" role="tabpanel" aria-labelledby="profins_l6">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">	
+												<p>Currency:</p>
+												<select class="form-control mt-2" name="curency" id="sel1">
+													@foreach($dropdownlist['crrcy'] as $x)
+														<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+													@endforeach
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">	
+												<p>Your Last Annual Gross Salary</p>
+												<input class="form-control mt-2" name="salary" placeholder="1,500,000.00">
+											</div>
+										</div>
+									</div>
+									<div class="col main">
+										<div class="row mb-3">
+											<div class="col-sm-12">
+												<hr>
+											</div>
+											<div class="col-sm-4">
+												<div>
+													<br>
+													<p>Performance Bonus</p>
+													<label class="mt-1">
+														<input type="checkbox" name="performance">
+														Yes
+													</label>
+												</div>
+												<div>
+													<br>
+													<p>Children Education Allowance</p>
+													<label class="mt-1">
+														<input type="checkbox" name="childrenEducation">
+														Yes
+													</label>
+												</div>
+												<div>
+													<br>
+													<p>Accomodation Allowance</p>
+													<label class="mt-1">
+														<input type="checkbox" name="accomodation">
+														Yes
+													</label>
+												</div>
+												<div>
+													<br>
+													<p>Annual Leave Allowance</p>
+													<label class="mt-1">
+														<input type="checkbox" name="annual">
+														Yes
+													</label>
+												</div>
+											</div>
+											<div class="col-sm-4">
+												<div>
+													<br>
+													<p>13th Month Salary</p>
+													<label class="mt-1">
+														<input type="checkbox" name="monthSalary">
+														Yes
+													</label>
+												</div>
+												<div>
+													<br>
+													<p>Pension Plan</p>
+													<label class="mt-1">
+														<input type="checkbox" name="pensiunPlane">
+														Yes
+													</label>
+												</div>
+												<div>
+													<br>
+													<p>Home Trip Allowance</p>
+													<label class="mt-1">
+														<input type="checkbox" name="homeTrip">
+														Yes
+													</label>
+												</div>
+												<div>
+													<br>
+													<p>Family Health Insurance</p>
+													<label class="mt-1">
+														<input type="checkbox" name="familyHealth">
+														Yes
+													</label>
+												</div>
+											</div>
+											<div class="col-sm-4">
+												<div>
+													<br>
+													<p>Transport Allowance</p>
+													<label class="mt-1">
+														<input type="checkbox" name="transportAllowance">
+														Yes
+													</label>
+												</div>
+												<div>
+													<br>
+													<p>Sick Leave Allowance</p>
+													<label class="mt-1">
+														<input type="checkbox" name="sickLeave">
+														Yes
+													</label>
+												</div>
+												<div>
+													<br>
+													<p>Employe Health Insurance</p>
+													<label class="mt-1">
+														<input type="checkbox" name="employeHealth">
+														Yes
+													</label>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Profesional on Edit -->
+	<div class="modal fade" id="profedt" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="post" action="actprofedt" enctype="multipart/form-data">
+					@method('patch')
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Profession or Employment</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Nav tabs -->
+							<ul class="nav nav-tabs">
+								<li class="nav-item"><a class="nav-link active" id="profedt_l1" data-toggle="tab" href="#profedt_t1" role="tab" aria-controls="profedt_t1" aria-selected="true">CV Builder</a></li>
+								<li><a class="nav-link" id="profedt_l2" data-toggle="tab" href="#profedt_t2" role="tab" aria-controls="profedt_t2" aria-selected="true">Job Desc</a></li>
+								<li><a class="nav-link" id="profedt_l3" data-toggle="tab" href="#profedt_t3" role="tab" aria-controls="profedt_t3" aria-selected="true">Publication</a></li>
+								<li><a class="nav-link" id="profedt_l4" data-toggle="tab" href="#profedt_t4" role="tab" aria-controls="profedt_t4" aria-selected="true">Organization</a></li>
+								<li><a class="nav-link" id="profedt_l5" data-toggle="tab" href="#profedt_t5" role="tab" aria-controls="profedt_t5" aria-selected="true">Employment</a></li>
+								<li><a class="nav-link" id="profedt_l6" data-toggle="tab" href="#profedt_t6" role="tab" aria-controls="profedt_t6" aria-selected="true">Remuneration</a></li>
+							</ul>
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div id="profedt_t1" class="tab-pane fade show active" role="tabpanel" aria-labelledby="profedt_t1">
+									<!-- @csrf -->
+									<div class="row">
+										<div class="col-md-4">
+											<div class="form-group">
+												<label>CV Builder Type</label>
+												<select class="form-control mt-2" name="cvBuilderType">
+													<option>Select</option>
+													@foreach($dropdownlist['cvbuildtyp'] as $x)
+														<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+													@endforeach
+												</select>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label>Industry or Organization Type</label>
+												<select class="form-control mt-2" name="industryType">
+													<option>Select</option>
+													@foreach($dropdownlist['orgtyp'] as $x)
+														<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+													@endforeach
+												</select>
+											</div>										
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<label>Job Family</label>
+												<select class="form-control mt-2" name="jobFamily">
+													<option>Select Job Family</option>
+													@foreach($dropdownlist['jobfam'] as $x)
+														<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+													@endforeach
+												</select>
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<p>Upload your CV doc or pdf</p>
+												<input type="file" name="fcv" class="form-control-file mt-2">
+											</div>
+										</div>
+										<div class="col-md-4">
+											<div class="form-group">
+												<p>Profile</p>
+												<input type="file" name="pcv" class="form-control-file mt-2">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="profedt_t2" class="tab-pane fade"  role="tabpanel" aria-labelledby="profedt_t2">
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<p>Organization Structure</p>
+												<select class="form-control mt-2" name="organizationStructure">
+													<option>Select</option>
+													@foreach($dropdownlist['orgstruct'] as $x)
+														<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+													@endforeach
+												</select>
+											</div>
+											<div class="form-group">
+												<p>Role Specialization</p>
+												<input class="form-control mt-2" name="roleSpecialization" placeholder="Corporate Financing">
+												@error('roleSpecialization') <small class="text-danger">{{ $message }}</small> @enderror
+											</div>
+											<div class="form-group">
+												<p>Number of Subordinate</p>
+												<input class="form-control mt-2" placeholder="7" name="numberSubordinate">
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<p>Job Title</p>
+												<select class="form-control mt-2" name="jobTitle">
+													<option value="">Select</option>
+													@foreach($dropdownlist['jobtit'] as $x)
+														<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+													@endforeach
+												</select>
+											</div>
+											<div class="form-group">
+												<p>Position Layer Hiearchy</p>
+												<select class="form-control mt-2" name="positionLayer">
+													<option value="staff">Pilhi</option>
+													@foreach($dropdownlist['poslay'] as $x)
+														<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+													@endforeach
+												</select>
+											</div>
+
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group ">
+												<label class="control-label " for="date">
+													Start Date :
+												</label>
+												<input class="form-control mt-2" id="date" name="date" type="date" />
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group ">
+												<label class="control-label " for="date">
+													Last Date :
+												</label>
+												<input class="form-control mt-2" id="date" name="lastDate" type="date" />
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<p>Field of Study:</p>
+											<input class="form-control mt-2" name="fieldStudy" placeholder="Computer Science">
+										</div>
+										<div class="col-sm-6">
+											<p>Subject Matter:</p>
+											<input class="form-control mt-2" name="subjectMaster" placeholder="Articial Intelegence">
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<br>
+											<p>Position Role/Duties/Responsibilities:</p>
+											<textarea name="positionRole" class="form-control mt-2 mb-3" id="comment"
+												placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed iste dignissimos distinctio recusandae magni nulla, eos laudantium minima, ullam veniam deleniti odio."></textarea>
+										</div>
+									</div>
+								</div>
+								<div id="profedt_t3" class="tab-pane fade" role="tabpanel" aria-labelledby="profedt_t3">
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<p>Jurnal or Publication</p>
+												<input class="form-control mt-2" name="jurnalPublication" placeholder="Network Review Herald">
+											</div>
+											<div class="form-group">
+												<p>Role on the Journal or Publication</p>
+												<input class="form-control mt-2" name="roleJurnalPublication"
+													placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit.">
+											</div>
+											<div class="form-group">
+												<p>Field of Study</p>
+												<textarea class="form-control mt-2" rows="5" id="comment" name="fieldOfStudy"
+													placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed iste dignissimos distinctio recusandae magni nulla, eos laudantium minima, ullam veniam deleniti odio."></textarea>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<p>Jurnal Title</p>
+												<input class="form-control mt-2" name="jurnalTitle" placeholder="Network Review Herald">
+											</div>
+											<div class="form-group">
+												<p>Other Contributors to Credit</p>
+												<input class="form-control mt-2" name="otherContribution" placeholder="Network Review Herald">
+											</div>
+											<div class="form-group">
+												<p>Subject Matter</p>
+												<textarea class="form-control mt-2" name="subjectMatter" rows="5" id="comment"
+													placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed iste dignissimos distinctio recusandae magni nulla, eos laudantium minima, ullam veniam deleniti odio."></textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="profedt_t4" class="tab-pane fade" role="tabpanel" aria-labelledby="profedt_t4">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Organization Name:</p>
+												<select name="organizationName" class="form-control mt-2 selectcomplete">
+												</select>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<p>Number and Street Name:</p>
+												<input class="form-control mt-2" placeholder="Kav 11, Jl. Jend Sudirman" name="numberStreet">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<p>Name of Community or Building</p>
+												<input class="form-control mt-2" placeholder="OKADA Office Park" name="nameComunity">
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<div class="form-group">
+												<p>RT/RW</p>
+												<input class="form-control mt-2" placeholder="04/05" name="rtrw">
+											</div>
+										</div>
+										<div class="col-sm-3">
+											<div class="form-group">
+												<p>Zip Code:</p>
+												<input class="form-control mt-2" name="zipCode" placeholder="17213">
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<p>Country:</p>
+												<Select class="form-control mt-2 selectcountry" onchange="getprovince(this.value)" name="country">
+												</select>
+											</div>
+										</div>
+										<div class="col-sm-6" >
+											<div class="form-group">
+												<p>Province:</p>
+												<Select class="form-control mt-2 selectprovince" onchange="getdistrict(this.value)" name="province" >
+												</select>
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-6">
+											<div class="form-group">
+												<p>District:</p>
+												<select class="form-control mt-2 selectdistrict" onchange="getcity(this.value)" name="district" >
+												</select>
+											</div>
+										</div>
+										<div class="col-sm-6">
+											<div class="form-group">
+												<p>City:</p>
+												<Select class="form-control mt-2 selectcity" name="city" >
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="profedt_t5" class="tab-pane fade" role="tabpanel" aria-labelledby="profedt_t5" >
+									<div class="row">
+										<div class="col-md-12">
+											<p>Employment Type</p>
+											<select class="form-control mt-2" name="employmentType" id="sel1">
+												<option value="">Select</option>
+												@foreach($dropdownlist['emptyp'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<p class="control-label " for="date">
+													Start Date :
+												</p>
+												<input class="form-control mt-2" id="date" name="dateMenu5" type="date" />
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group ">
+												<p class="control-label " for="date">
+													End Date :
+												</p>
+												<input class="form-control mt-2" id="date" name="lastDateMenu5" type="date" />
+											</div>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-sm-12">
+											<h3 class="text-danger"><br>WHAT IF CONDITION => if Last Date is prior to
+												Today's Date</h3>
+											<select class="form-control mt-2" id="sel1" name="kerjaan">
+												<option value="">Select</option>
+												@foreach($dropdownlist['emptyp'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Contact Reference Name:</p>
+												<input class="form-control mt-2" name="contactReferenceName" placeholder="Karl-Henrik Johansson">
+											</div>
+											<div class="form-group">
+												<p>Contact Email Address:</p>
+												<input class="form-control mt-2" name="contactEmailAddress" placeholder="mark@gmail.com">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Contact Company or Organization Name:</p>
+												<input class="form-control mt-2" name="contactCompanyOrganization" placeholder="Scheepholment Technologies">
+											</div>
+											<div class="form-group">
+												<p>Contact Phone:</p>
+												<input class="form-control mt-2" name="contactPhone" placeholder="+62 881 222 4848">
+											</div>
+										</div>
+									</div>
+								</div>
+								<div id="profedt_t6" class="tab-pane fade" role="tabpanel" aria-labelledby="profedt_t6">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">	
+												<p>Currency:</p>
+												<select class="form-control mt-2" name="curency" id="sel1">
+													@foreach($dropdownlist['crrcy'] as $x)
+														<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+													@endforeach
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">	
+												<p>Your Last Annual Gross Salary</p>
+												<input class="form-control mt-2" name="salary" placeholder="1,500,000.00">
+											</div>
+										</div>
+									</div>
+									<div class="col main">
+										<div class="row mb-3">
+											<div class="col-sm-12">
+												<hr>
+											</div>
+											<div class="col-sm-4">
+												<div>
+													<br>
+													<p>Performance Bonus</p>
+													<label class="mt-1">
+														<input type="checkbox" name="performance">
+														Yes
+													</label>
+												</div>
+												<div>
+													<br>
+													<p>Children Education Allowance</p>
+													<label class="mt-1">
+														<input type="checkbox" name="childrenEducation">
+														Yes
+													</label>
+												</div>
+												<div>
+													<br>
+													<p>Accomodation Allowance</p>
+													<label class="mt-1">
+														<input type="checkbox" name="accomodation">
+														Yes
+													</label>
+												</div>
+												<div>
+													<br>
+													<p>Annual Leave Allowance</p>
+													<label class="mt-1">
+														<input type="checkbox" name="annual">
+														Yes
+													</label>
+												</div>
+											</div>
+											<div class="col-sm-4">
+												<div>
+													<br>
+													<p>13th Month Salary</p>
+													<label class="mt-1">
+														<input type="checkbox" name="monthSalary">
+														Yes
+													</label>
+												</div>
+												<div>
+													<br>
+													<p>Pension Plan</p>
+													<label class="mt-1">
+														<input type="checkbox" name="pensiunPlane">
+														Yes
+													</label>
+												</div>
+												<div>
+													<br>
+													<p>Home Trip Allowance</p>
+													<label class="mt-1">
+														<input type="checkbox" name="homeTrip">
+														Yes
+													</label>
+												</div>
+												<div>
+													<br>
+													<p>Family Health Insurance</p>
+													<label class="mt-1">
+														<input type="checkbox" name="familyHealth">
+														Yes
+													</label>
+												</div>
+											</div>
+											<div class="col-sm-4">
+												<div>
+													<br>
+													<p>Transport Allowance</p>
+													<label class="mt-1">
+														<input type="checkbox" name="transportAllowance">
+														Yes
+													</label>
+												</div>
+												<div>
+													<br>
+													<p>Sick Leave Allowance</p>
+													<label class="mt-1">
+														<input type="checkbox" name="sickLeave">
+														Yes
+													</label>
+												</div>
+												<div>
+													<br>
+													<p>Employe Health Insurance</p>
+													<label class="mt-1">
+														<input type="checkbox" name="employeHealth">
+														Yes
+													</label>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Job Future on Insert -->
+	<div class="modal fade" id="jobfutins" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="post" action="actjobfutins">
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Future Job</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row">
+									<div class="col-sm-12 mb-2">
+										<h3 class="text-primary">Tell about how you like Future Job</h3>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12 mb-1">
+										<h3 class="text-primary">Location :</h3>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-3">
+										<div class="form-group">
+											<p>Overseas :</p>
+											<input type="checkbox" id="defaultChecked"name="c1">  
+											<label class="" for="defaultChecked2">Yes</label>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<p>Overseas :</p>
+											<input type="checkbox" id="defaultChecked"name="c2">  
+											<label class="" for="defaultChecked2">Yes</label>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Name City :</p>
+											<select class="form-control mt-2" name="c3">
+												<option>Select City</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12 mb-2">
+										<h3 class="text-primary">Job Engagement :</h3>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-2">
+										<div class="form-group">
+											<p>Full Time :</p>
+											<input type="checkbox" name="c4">
+											<label >Yes</label>
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="form-group">
+											<p>Consultant :</p>
+											<input type="checkbox" name="c5">
+											<label>Yes</label>
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="form-group">
+											<p>Part Time</p>
+											<input type="checkbox" name="c6">
+											<label>Yes</label>
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="form-group">
+											<p>Contractor :</p>
+											<input type="checkbox" name="c7">
+											<label>Yes</label>
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="form-group">
+											<p>Freelance :</p>
+											<input type="checkbox" name="c8">
+											<label>Yes</label>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<p class="control-label " for="date">
+												Available Date :
+											</p>
+											<input class="form-control mt-2" id="date"
+													name="c9" placeholder="MM/DD/YYYY"
+													type="date" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12 mb-2">
+										<h3 class="text-primary">Industry and Job Role :</h3>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<p>Name Industry :</p>
+											<select class="form-control mt-2" name="c10">
+												<option value="">Select</option>
+												@foreach($dropdownlist['indsty'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+										<div class="form-group">
+											<p>Name Position :</p>
+											<select class="form-control mt-2" name="c11">
+												<option value="">Select</option>
+												@foreach($dropdownlist['poslev'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<p>Name Job Family :</p>
+											<select class="form-control mt-2" name="c12">
+												<option>Select</option>
+												@foreach($dropdownlist['jobfam'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+										<div class="form-group">
+											<p>Name Company :</p>
+											<input class="form-control mt-2" name="c13u" placeholder="AeroModeling">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12 mb-2">
+										<h3 class="text-primary">Remuneration and Packages :</h3>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<p>Currency :</p>
+											<select class="form-control mt-2" name="c14">
+												<option value="">pilih</option>
+												@foreach($dropdownlist['crrcy'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<p>Annual Take Home Pay +/- 5%</p>
+											<input class="form-control mt-2" name="c15" placeholder="Free Text">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Bonus</p>
+											<input type="checkbox" name="c16" >
+											<label>Yes</label>
+										</div>
+										<div class="form-group">
+											<p>Family Healt Insurance</p>
+											<input type="checkbox" name="c17" >
+											<label>Yes</label>
+										</div>
+										<div class="form-group">
+											<p>Housing Facility</p>
+											<input type="checkbox" name="c18" >
+											<label>Yes</label>
+										</div>
+										<div class="form-group">
+											<p>Paid Leave</p>
+											<input type="checkbox" name="c19" >
+											<label>Yes</label>
+										</div>
+										<div class="form-group">
+											<p>Benefits</p>
+											<input type="checkbox" name="c20" >
+											<label>Yes</label>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Pension Plan</p>
+											<input type="checkbox" name="c21" >
+											<label>Yes</label>
+										</div>
+										<div class="form-group">
+											<p>Transport Facility</p>
+											<input type="checkbox" name="c22" >
+											<label>Yes</label>
+										</div>
+										<div class="form-group">
+											<p>Paid Home Trip</p>
+											<input type="checkbox" name="c23" >
+											<label>Yes</label>
+										</div>
+										<div class="form-group">
+											<p>Employee Health Insurance</p>
+											<input type="checkbox" name="c24" >
+											<label>Yes</label>
+										</div>
+										<div class="form-group">
+											<p>Child Benefits</p>
+											<input name="c25" type="checkbox" >
+											<label>Yes</label>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<h3 class="text-primary mb-2">Reason for looking for a future job</h3>
+										<div class="form-group">
+											<p class="text-danger">(Will Not be shown to public)</p>
+											<select class="form-control mt-2" name="c26">
+												@foreach($dropdownlist['rsnlook'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Job Future on Edit -->
+	<div class="modal fade" id="jobfutedt" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="post" action="frmjobfutedt">
+					@method('patch')
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Future Job</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row">
+									<div class="col-sm-12 mb-2">
+										<input type="hidden" name="indexjobfut" value="">
+										<h3 class="text-primary">Tell about how you like Future Job</h3>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12 mb-1">
+										<h3 class="text-primary">Location :</h3>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-3">
+										<div class="form-group">
+											<p>Overseas :</p>
+											<input type="checkbox" id="defaultChecked" name="jobovr">  
+											<label class="" for="defaultChecked2">Yes</label>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<p>Overseas :</p>
+											<input type="checkbox" id="defaultChecked" name="jobout">  
+											<label class="" for="defaultChecked2">Yes</label>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Name City :</p>
+											<select class="form-control mt-2" name="jobname">
+												<option>Select City</option>
+											</select>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12 mb-2">
+										<h3 class="text-primary">Job Engagement :</h3>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-2">
+										<div class="form-group">
+											<p>Full Time :</p>
+											<input type="checkbox" name="jobfull">
+											<label >Yes</label>
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="form-group">
+											<p>Consultant :</p>
+											<input type="checkbox" name="jobcons">
+											<label>Yes</label>
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="form-group">
+											<p>Part Time</p>
+											<input type="checkbox" name="jobpart">
+											<label>Yes</label>
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="form-group">
+											<p>Contractor :</p>
+											<input type="checkbox" name="jobcont">
+											<label>Yes</label>
+										</div>
+									</div>
+									<div class="col-md-2">
+										<div class="form-group">
+											<p>Freelance :</p>
+											<input type="checkbox" name="jobfree">
+											<label>Yes</label>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<p class="control-label " for="date">
+												Available Date :
+											</p>
+											<input class="form-control mt-2" id="date"
+													name="jobavadate" placeholder="MM/DD/YYYY"
+													type="date" />
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12 mb-2">
+										<h3 class="text-primary">Industry and Job Role :</h3>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<p>Name Industry :</p>
+											<select class="form-control mt-2" name="selind">
+												<option value="">Select</option>
+												@foreach($dropdownlist['indsty'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+										<div class="form-group">
+											<p>Name Position :</p>
+											<select class="form-control mt-2" name="selpos">
+												<option value="">Select</option>
+												@foreach($dropdownlist['poslev'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<p>Name Job Family :</p>
+											<select class="form-control mt-2" name="selfam">
+												<option>Select</option>
+												@foreach($dropdownlist['jobfam'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+										<div class="form-group">
+											<p>Name Company :</p>
+											<input class="form-control mt-2" name="selcom" placeholder="AeroModeling">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-12 mb-2">
+										<h3 class="text-primary">Remuneration and Packages :</h3>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<p>Currency :</p>
+											<select class="form-control mt-2" name="rempro">
+												<option value="">pilih</option>
+												@foreach($dropdownlist['crrcy'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<p>Annual Take Home Pay +/- 5%</p>
+											<input class="form-control mt-2" name="rememp" placeholder="Free Text">
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Bonus</p>
+											<input type="checkbox" name="remperf" >
+											<label>Yes</label>
+										</div>
+										<div class="form-group">
+											<p>Family Healt Insurance</p>
+											<input type="checkbox" name="remfam" >
+											<label>Yes</label>
+										</div>
+										<div class="form-group">
+											<p>Housing Facility</p>
+											<input type="checkbox" name="remfac" >
+											<label>Yes</label>
+										</div>
+										<div class="form-group">
+											<p>Paid Leave</p>
+											<input type="checkbox" name="remanno" >
+											<label>Yes</label>
+										</div>
+										<div class="form-group">
+											<p>Benefits</p>
+											<input type="checkbox" name="remchi" >
+											<label>Yes</label>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Pension Plan</p>
+											<input type="checkbox" name="rempens" >
+											<label>Yes</label>
+										</div>
+										<div class="form-group">
+											<p>Transport Facility</p>
+											<input type="checkbox" name="remfact" >
+											<label>Yes</label>
+										</div>
+										<div class="form-group">
+											<p>Paid Home Trip</p>
+											<input type="checkbox" name="remhome" >
+											<label>Yes</label>
+										</div>
+										<div class="form-group">
+											<p>Employee Health Insurance</p>
+											<input type="checkbox" name="reminsu" >
+											<label>Yes</label>
+										</div>
+										<div class="form-group">
+											<p>Child Benefits</p>
+											<input name="remchild" type="checkbox" >
+											<label>Yes</label>
+										</div>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-sm-6">
+										<h3 class="text-primary mb-2">Reason for looking for a future job</h3>
+										<div class="form-group">
+											<p class="text-danger">(Will Not be shown to public)</p>
+											<select class="form-control mt-2" name="jobava">
+												@foreach($dropdownlist['rsnlook'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Organization on Insert -->
+	<div class="modal fade" id="organins" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="post" action="actorganins">
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Organization</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<p>Type of Organization</p>
+											<select class="form-control mt-2" name="typeOrganization">
+												<option value="linear">Linear</option>
+												@foreach ($ddindustrytype as $x)
+													<option value="{{ $x['val'] }}">{{ $x['val'] }}</option>
+												@endforeach
+											</select>
+										</div>
+										<div class="form-group">
+											<p>Membership Role</p>
+											<input class="form-control mt-2" name="membershipRole" placeholder="Regular Member">
+										</div>
+										<div class="form-group ">
+											<label class="control-label " for="date">
+												Membership Start :
+											</label>
+											<input class="form-control mt-2" name="membershipStart" id="date" name="date"
+													placeholder="MM/DD/YYYY" type="date" />
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<p>Organization City</p>
+											<input class="form-control mt-2" name="organizationCity" placeholder="Lousiana Chapter">
+										</div>
+										<div class="form-group">
+											<p>Organization legal Name</p>
+											<select class="form-control mt-2" name="organizationLegalName">
+												<option value="omicron delta opsiron">Omicron Delta Opsiron</option>
+												@foreach ($dropdown as $x)
+													<option value="{{ $x['option'] }}">{{ $x['option'] }}</option>
+												@endforeach
+											</select>
+										</div>
+										<div class="form-group ">
+											<label class="control-label " for="date">
+												Membership Until :
+											</label>
+											<input name="membershipUntil" class="form-control mt-2" id="date"
+													placeholder="MM/DD/YYYY" type="date" />
+										</div>
+									</div>
+									<div class="col-sm-12">
+										<div class="form-group">
+											<p>Brief Description of The Organization:</p>
+											<textarea class="form-control mt-2" id="comment" name="briefDescription"
+												placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed iste dignissimos distinctio recusandae magni nulla, eos laudantium minima, ullam veniam deleniti odio."></textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Organization on Insert -->
+	<div class="modal fade" id="organedt" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="post" action="actorganins">
+					@method('patch')
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Organization</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row">
+									<div class="col-sm-6">
+										<div class="form-group">
+											<p>Type of Organization</p>
+											<input type="hidden" name="indexorgan" value="">
+											<select class="form-control mt-2" name="typeOrganization">
+												<option value="linear">Linear</option>
+												@foreach ($ddindustrytype as $x)
+													<option value="{{ $x['val'] }}">{{ $x['val'] }}</option>
+												@endforeach
+											</select>
+										</div>
+										<div class="form-group">
+											<p>Membership Role</p>
+											<input class="form-control mt-2" name="membershipRole" placeholder="Regular Member">
+										</div>
+										<div class="form-group ">
+											<label class="control-label " for="date">
+												Membership Start :
+											</label>
+											<input class="form-control mt-2" name="membershipStart" id="date" name="date"
+													placeholder="MM/DD/YYYY" type="date" />
+										</div>
+									</div>
+									<div class="col-sm-6">
+										<div class="form-group">
+											<p>Organization City</p>
+											<input class="form-control mt-2" name="organizationCity" placeholder="Lousiana Chapter">
+										</div>
+										<div class="form-group">
+											<p>Organization legal Name</p>
+											<select class="form-control mt-2" name="organizationLegalName">
+												<option value="omicron delta opsiron">Omicron Delta Opsiron</option>
+												@foreach ($dropdown as $x)
+													<option value="{{ $x['option'] }}">{{ $x['option'] }}</option>
+												@endforeach
+											</select>
+										</div>
+										<div class="form-group ">
+											<label class="control-label " for="date">
+												Membership Until :
+											</label>
+											<input name="membershipUntil" class="form-control mt-2" id="date"
+													placeholder="MM/DD/YYYY" type="date" />
+										</div>
+									</div>
+									<div class="col-sm-12">
+										<div class="form-group">
+											<p>Brief Description of The Organization:</p>
+											<textarea class="form-control mt-2" id="comment" name="briefDescription"
+												placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed iste dignissimos distinctio recusandae magni nulla, eos laudantium minima, ullam veniam deleniti odio."></textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Skill on Insert -->
+	<div class="modal fade" id="skiins" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="post" action="actskiins">
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Skill</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="">Skill Name</label>
+											<input name="skill_name" placeholder="AeroModeling"class="form-control mt-2" type="text">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="">Certification Issuer</label>
+											<input name="certificateIssuer"placeholder="City Council Permit" class="form-control mt-2"type="text">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="">Certification Level</label>
+											<input name="certificateLevel"placeholder="City Council Permit" class="form-control mt-2"type="text">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="">Certification Date</label>
+											<input class="form-control mt-2" id="date" name="certificationDateski" placeholder="MM/DD/YYYY"			type="date" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Skill on Edit -->
+	<div class="modal fade" id="skiedt" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="POST" action="" id="frmskiedt">
+					@method('patch')
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Skill</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="">Skill Name</label>
+											<input type="hidden" name="indexski" value="">
+											<input name="skill_nameedt" placeholder="AeroModeling"class="form-control mt-2" type="text">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="">Certification Issuer</label>
+											<input name="certificateIssueredt"placeholder="City Council Permit" class="form-control mt-2"type="text">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="">Certification Level</label>
+											<input name="certificateLeveledt"placeholder="City Council Permit" class="form-control mt-2"type="text">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="">Certification Date</label>
+											<input class="form-control mt-2" id="date" name="certificationDateedtski" placeholder="MM/DD/YYYY" type="date" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Education on Insert -->
+	<div class="modal fade" id="educins" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="post" action="acteduins">
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Education</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<ul class="nav nav-tabs">
+								<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#educationadd12" role="tab" aria-controls="educationadd12" aria-selected="true">Institution or University</a></li>
+								<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#educationAdd13" role="tab" aria-controls="educationadd13" aria-selected="true">Degree</a></li>
+							</ul>
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div id="educationadd12" class="tab-pane fade show active" role="tabpanel" aria-labelledby="educationadd12">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Institution/University</p>
+												<input class="form-control mt-2" name="instituionUniversity"
+													placeholder="University of California Los Angeles">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>City</p>
+												<input class="form-control mt-2" name="city" placeholder="Los Angeles">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Zip code</p>
+												<input class="form-control mt-2" name="zipCode" placeholder="16312">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Country</p>
+												<input class="form-control mt-2" name="country" placeholder="USA">
+											</div>
+										</div>
+									</div>	
+								</div>
+								<div id="educationAdd13" class="tab-pane fade"  role="tabpanel" aria-labelledby="educationadd13">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Degree or certification :</p>
+												<input class="form-control mt-2" name="degreCertification" placeholder="Corporate Financing">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Faculty or field of study :</p>
+												<input class="form-control mt-2" name="facultyStudy" placeholder="Corporate Financing">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Mayor :</p>
+												<input class="form-control mt-2" name="mayor" placeholder="Corporate Financing">
+											</div>
+										</div>
+										<div class="col-md-6">												
+											<div class="form-group">
+												<p>Minor :</p>
+												<input class="form-control mt-2" name="minor" placeholder="Corporate Financing">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>GPA</p>
+												<input class="form-control mt-2" name="gpa" placeholder="+00">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>GPA</p>
+												<input class="form-control mt-2" name="gpa2" placeholder="+00">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group ">
+												<label class="control-label " for="date">
+													Start Date :
+												</label>
+												<input class="form-control mt-2" id="date" name="startDate" placeholder="MM/DD/YYYY" type="date" />
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group ">
+												<label class="control-label " for="date">
+													Last Date :
+												</label>
+													<input class="form-control mt-2" id="date" name="lastDate" placeholder="MM/DD/YYYY" type="date" />
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Degree Revoks:</p>
+												<input class="form-control mt-2" name="degreRevoks" placeholder="Computer Science">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Thesis Advisor:</p>
+												<input class="form-control mt-2" name="tesisAdvisor" placeholder="Articial Intelegence">
+											</div>
+										</div>
+										<div class="col-md-12">
+											<div class="form-group">
+												<p>Research Thesis:</p>
+												<textarea class="form-control mt-2" name="researchThesis" id="comment"
+													placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit."></textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Education on Edit -->
+	<div class="modal fade" id="educedt" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="post" action="acteduedt" id="frmeduedt">
+					@method('patch')
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Education</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<ul class="nav nav-tabs">
+								<li class="nav-item"><a class="nav-link active" data-toggle="tab" href="#educationedt12" role="tab" aria-controls="educationedt12" aria-selected="true">Institution or University</a></li>
+								<li class="nav-item"><a class="nav-link" data-toggle="tab" href="#educationedt13" role="tab" aria-controls="educationedt13" aria-selected="true">Degree</a></li>
+							</ul>
+							<!-- Tab panes -->
+							<div class="tab-content">
+								<div id="educationedt12" class="tab-pane fade show active" role="tabpanel" aria-labelledby="educationedt12">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Institution/University</p>
+												<input type="hidden" name="indexedu" value="">
+												<input class="form-control mt-2" name="instituionUniversity"
+													placeholder="University of California Los Angeles">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>City</p>
+												<input class="form-control mt-2" name="city" placeholder="Los Angeles">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Zip code</p>
+												<input class="form-control mt-2" name="zipCode" placeholder="16312">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Country</p>
+												<input class="form-control mt-2" name="country" placeholder="USA">
+											</div>
+										</div>
+									</div>	
+								</div>
+								<div id="educationedt13" class="tab-pane fade"  role="tabpanel" aria-labelledby="educationedt13">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Degree or certification :</p>
+												<input class="form-control mt-2" name="degreCertification" placeholder="Corporate Financing">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Faculty or field of study :</p>
+												<input class="form-control mt-2" name="facultyStudy" placeholder="Corporate Financing">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Mayor :</p>
+												<input class="form-control mt-2" name="mayor" placeholder="Corporate Financing">
+											</div>
+										</div>
+										<div class="col-md-6">												
+											<div class="form-group">
+												<p>Minor :</p>
+												<input class="form-control mt-2" name="minor" placeholder="Corporate Financing">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>GPA</p>
+												<input class="form-control mt-2" name="gpa" placeholder="+00">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>GPA</p>
+												<input class="form-control mt-2" name="gpa2" placeholder="+00">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group ">
+												<label class="control-label " for="date">
+													Start Date :
+												</label>
+												<input class="form-control mt-2" id="date" name="startDate" placeholder="MM/DD/YYYY" type="date" />
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group ">
+												<label class="control-label " for="date">
+													Last Date :
+												</label>
+													<input class="form-control mt-2" id="date" name="lastDate" placeholder="MM/DD/YYYY" type="date" />
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Degree Revoks:</p>
+												<input class="form-control mt-2" name="degreRevoks" placeholder="Computer Science">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Thesis Advisor:</p>
+												<input class="form-control mt-2" name="tesisAdvisor" placeholder="Articial Intelegence">
+											</div>
+										</div>
+										<div class="col-md-12">
+											<div class="form-group">
+												<p>Research Thesis:</p>
+												<textarea class="form-control mt-2" name="researchThesis" id="comment"
+													placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit."></textarea>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>									
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Phone Number on Insert -->
+	<div class="modal fade" id="phoneins" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="post" action="actphoneins">
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Phone Number</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Phone Number</p>
+											<input class="form-control mt-2" type="number" placeholder="091832398232823" name="phoneNumber">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Phone Type</p>
+											<select class="form-control mt-2" name="phoneType">
+												<option value="">Select</option>
+												@foreach($dropdownlist['phtyp'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Phone Verification Status</p>
+											<input type="text" name="phoneVerification" class="form-control mt-2" id="">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Phone Number on Edit -->
+	<div class="modal fade" id="phoneedt" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="POST" action="" id="frmphoneedt">
+					@method('patch')
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Phone Number</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Phone Number</p>
+											<input type="hidden" name="indexpho" value="">
+											<input class="form-control mt-2" type="text" placeholder="091832398232823" name="phoneNumberedt">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Phone Type</p>
+											<select class="form-control mt-2" name="phoneTypeedt">
+												<option value="">Select</option>
+												@foreach($dropdownlist['phtyp'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<br>
+											<h5><b>Phone Verification Status : </b></h5>
+											<input type="text" name="phoneVerificationedt" class="form-control mt-2" id="">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Email on Insert -->
+	<div class="modal fade" id="emailins" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="post" action="actemailins">
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Email Address</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Email Address</p>
+											<input name="email" class="form-control mt-2" placeholder="tamarakochanovic@gmail.com">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Email Contact Priority</p>
+											<select class="form-control mt-2" name="emailPriority">
+												<option value="">Select</option>
+												@foreach($dropdownlist['emactc'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Email Verification Status : </p>
+											<input type="text" name="emailStatus" class="form-control mt-2" readonly value="pending">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Email on Edit -->
+	<div class="modal fade" id="emailedt" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="POST" action="" id="frmemailedt">
+					@method('patch')
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Email Address</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Email Address</p>
+											<input type="hidden" name="indexema" value="">
+											<input name="emailedt" class="form-control mt-2" placeholder="tamarakochanovic@gmail.com">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Email Contact Priority</p>
+											<select class="form-control mt-2" name="emailPriorityedt">
+												<option value="">Select</option>
+												@foreach($dropdownlist['emactc'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Email Verification Status : </p>
+											<input type="text" name="emailStatusedt" class="form-control mt-2" readonly value="pending">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Bio Profile on Insert -->
+	<div class="modal fade" id="bioins" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="post" action="actbioins" enctype="multipart/form-data">
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Bio Profile</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Profile Picture</p>
+											<input type="file" name="uploadGambar" class="form-control-file mt-2">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>First Name :</p>
+											<input class="form-control mt-2" name="firstName" placeholder="Tamara">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Middle Name :</p>
+											<input class="form-control mt-2" name="middleName" placeholder="Gordana">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Last Name :</p>
+											<input class="form-control mt-2" name="lastName" placeholder="Kochanovic">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Name Alias :</p>
+											<input class="form-control mt-2" name="aliasName" placeholder="Kochanovic">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Salutation :</p>
+											<select class="form-control mt-2" name="solution">
+												<option value="">Select</option>
+												@foreach ($dropdownlist['slttn'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p for="date">
+												Date of Birth :
+											</p>
+												<input class="form-control mt-2" id="date" name="dateBirth"
+													placeholder="MM/DD/YYYY" type="date" />
+										</div>
+										<div class="form-group">
+											<p>Blood Type :</p>
+											<select class="form-control mt-2" name="bloodType">
+												<option value="">Select</option>
+												@foreach ($dropdownlist['bldtyp'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Name Title :</p>
+											<select class="form-control mt-2" name="nameTitle">
+												<option value="">Select</option>
+												@foreach ($dropdownlist['nmtit'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+										<div class="form-group">
+											<p>Gender :</p>
+											<select class="form-control mt-2" name="gender">
+												<option value="">Select</option>
+												@foreach ($dropdownlist['gdr'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Native Language :</p>
+											<input class="form-control mt-2" placeholder="Polish" name="nativeLanguage">
+										</div>
+										<div class="form-group">
+											<p>Complexion Color :</p>
+											<select class="form-control mt-2" name="complexionColor">
+												<option value="">Select</option>
+												@foreach ($dropdownlist['color'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+										<div class="form-group">
+											<p>Ethnic :</p>
+											<select class="form-control mt-2" name="ethnic">
+												<option value="">Select</option>
+												@foreach ($dropdownlist['ethn'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Faith Creed :</p>
+											<select class="form-control mt-2" name="faithCreed">
+												<option value="">Select</option>
+												@foreach ($dropdownlist['faith'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+										<div class="form-group">
+											<p>Height :</p>
+											<input class="form-control mt-2" name="height" placeholder="178cm">
+										</div>
+										<div class="form-group">
+											<p>Civil Status :</p>
+											<select class="form-control mt-2" name="bio_id_dropdown_cvlsts_ins">
+												@foreach ($dropdownlist['cvlsts'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Bio Profile on Edit -->
+	<div class="modal fade" id="bioedt" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="POST" action="" id="frmbioedt" enctype="multipart/form-data">
+					@method('patch')
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Bio Profile</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row">
+									<div class="row">
+										<div class="col-md-6">
+											<div class="form-group">
+											<input type="hidden" name="indexbio" value="">
+												<p>Profile Picture</p>
+												<input type="file" name="uploadGambar" class="form-control-file mt-2">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>First Name :</p>
+												<input class="form-control mt-2" name="firstName" placeholder="Tamara">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Middle Name :</p>
+												<input class="form-control mt-2" name="middleName" placeholder="Gordana">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Last Name :</p>
+												<input class="form-control mt-2" name="lastName" placeholder="Kochanovic">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Name Alias :</p>
+												<input class="form-control mt-2" name="aliasName" placeholder="Kochanovic">
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Salutation :</p>
+												<select class="form-control mt-2" name="solution">
+													<option value="">Select</option>
+													@foreach ($dropdownlist['slttn'] as $x)
+														<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+													@endforeach
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p for="date">
+													Date of Birth :
+												</p>
+													<input class="form-control mt-2" id="date" name="dateBirth"
+														placeholder="MM/DD/YYYY" type="date" />
+											</div>
+											<div class="form-group">
+												<p>Blood Type :</p>
+												<select class="form-control mt-2" name="bloodType">
+													<option value="">Select</option>
+													@foreach ($dropdownlist['bldtyp'] as $x)
+														<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+													@endforeach
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Name Title :</p>
+												<select class="form-control mt-2" name="nameTitle">
+													<option value="">Select</option>
+													@foreach ($dropdownlist['nmtit'] as $x)
+														<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+													@endforeach
+												</select>
+											</div>
+											<div class="form-group">
+												<p>Gender x:</p>
+												<input type="hidden" name="bio_id_dropdown_gdr_buang" value="">
+												<select class="form-control mt-2" name="bio_id_dropdown_gdr">
+													@foreach ($dropdownlist['gdr'] as $x)
+														<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+													@endforeach
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Native Language :</p>
+												<input class="form-control mt-2" placeholder="Polish" name="nativeLanguage">
+											</div>
+											<div class="form-group">
+												<p>Complexion Color :</p>
+												<select class="form-control mt-2" name="complexionColor">
+													<option value="">Select</option>
+													@foreach ($dropdownlist['color'] as $x)
+														<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+													@endforeach
+												</select>
+											</div>
+											<div class="form-group">
+												<p>Ethnic :</p>
+												<select class="form-control mt-2" name="ethnic">
+													<option value="">Select</option>
+													@foreach ($dropdownlist['ethn'] as $x)
+														<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+													@endforeach
+												</select>
+											</div>
+										</div>
+										<div class="col-md-6">
+											<div class="form-group">
+												<p>Faith Creed :</p>
+												<select class="form-control mt-2" name="faithCreed">
+													<option value="">Select</option>
+													@foreach ($dropdownlist['faith'] as $x)
+														<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+													@endforeach
+												</select>
+											</div>
+											<div class="form-group">
+												<p>Height :</p>
+												<input class="form-control mt-2" name="height" placeholder="178cm">
+											</div>
+											<div class="form-group">
+												<p>Civil Status:</p>
+												<select class="form-control mt-2" name="bio_id_dropdown_cvlsts">
+													@foreach ($dropdownlist['cvlsts'] as $x)
+														<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+													@endforeach
+												</select>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Certification on Insert -->
+	<div class="modal fade" id="certins" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="post" action="actcertins">
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Certification</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Certification Name</p>
+											<input name="cer_OrgName" class="form-control mt-2" placeholder="Redundant Networking">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Certification Issuer</p>
+											<input name="cer_OrgDept" class="form-control mt-2" placeholder="Juniper Network">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Issuer Department</p>
+											<input name="cer_OrgIssuer" class="form-control mt-2" placeholder="Consumer Product">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Certification Level</p>
+											<input name="cer_OrgLevel" class="form-control mt-2" placeholder="Advance Troubleshooting">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Certification Date</p>
+											<input class="form-control mt-2" id="date" name="cer_RegDate" placeholder="MM/DD/YYYY"
+											type="date" />
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Certification Details</p>
+											<textarea name="cer_OrgDetail" class="form-control mt-2" placeholder="Tamara"></textarea>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Certification City</p>
+											<input name="cer_OrgCity" class="form-control mt-2" placeholder="Kuala Lumpur">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Certification Country</p>
+											<input name="cer_OrgCountry" class="form-control mt-2" placeholder="MALAYSIA">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Certification on Edit -->
+	<div class="modal fade" id="certedt" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="POST" action="actcertedt" id="frmcertedt">
+					@method('patch')
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Certification</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row mt-3">
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Certifation Name</p>
+											<input type="hidden" name="indexcert" value="">
+											<input name="certifationNameedt" class="form-control mt-2" placeholder="Redundant Networking">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Certifation Issuer</p>
+											<input name="certifationIssueredt" class="form-control mt-2" placeholder="Juniper Network">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Issuer Department</p>
+											<input name="issuerDepartmentedt" class="form-control mt-2" placeholder="Consumer Product">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Certification Level</p>
+											<input name="certificationLeveledt" class="form-control mt-2" placeholder="Advance Troubleshooting">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Certification Date</p>
+											<input class="form-control mt-2" id="date" name="certificationDateedt" placeholder="MM/DD/YYYY"
+												type="date" />
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Certification Details</p>
+											<textarea name="certificationDetailedt" class="form-control mt-2" placeholder="Tamara"></textarea>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Certification City</p>
+											<input name="certificationCityedt" class="form-control mt-2" placeholder="Kuala Lumpur">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Certification Country</p>
+											<input name="certificationCountryedt" class="form-control mt-2" placeholder="MALAYSIA">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Language on Insert -->
+	<div class="modal fade" id="langins" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="post" action="actlangins">
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Language</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Language Name :</p>
+											<select class="form-control mt-2" name="languageName">
+												<option value="">Select</option>
+												@foreach($dropdownlist['langg'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Institution/University :</p>
+											<input class="form-control mt-2" name="institutionUniversity"
+												placeholder="Kaplon Language Preparation School">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Zip Code :</p>
+											<input class="form-control mt-2" placeholder="15634" name="zipCode">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Degree or Certification :</p>
+											<input class="form-control mt-2" name="degereCertification" placeholder="TOEFL">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>City :</p>
+											<input class="form-control mt-2" name="city" placeholder="Los Angeles">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Country :</p>
+											<input class="form-control mt-2" name="country" placeholder="USA">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Level:</p>
+											<input class="form-control mt-2" name="level" placeholder="TOEFL">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Score :</p>
+											<input class="form-control mt-2" name="score" placeholder="600">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p class="control-label " for="date">
+												Certification Date :
+											</p>
+											<input class="form-control mt-2" id="date" name="certificationDate" placeholder="MM/DD/YYYY" type="date" />
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Written:</p>
+											<input class="form-control mt-2" name="written" placeholder="8">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Listening :</p>
+											<input class="form-control mt-2" name="listening" placeholder="8">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Conversation :</p>
+											<input class="form-control mt-2" name="conversation" placeholder="8">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Language on Edit -->
+	<div class="modal fade" id="langedt" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="POST" action="actlangedt" id="frmlangedt">
+					@method('patch')
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Language</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<input type="hidden" name="indexlang" value="">
+											<p>Language Namex :</p>
+											<select class="form-control mt-2" name="languageName">												
+												@foreach ($dropdownlist['langg'] as $x)
+												<option value="{{ $x['namedropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Institution/University :</p>
+											<input class="form-control mt-2" name="institutionUniversity"
+												placeholder="Kaplon Language Preparation School">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Zip Code :</p>
+											<input class="form-control mt-2" placeholder="15634" name="zipCode">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>City :</p>
+											<input class="form-control mt-2" name="city" placeholder="Los Angeles">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Country :</p>
+											<input class="form-control mt-2" name="country" placeholder="USA">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Degree or Certification :</p>
+											<input class="form-control mt-2" name="degereCertification" placeholder="TOEFL">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Level:</p>
+											<input class="form-control mt-2" name="level" placeholder="TOEFL">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Score :</p>
+											<input class="form-control mt-2" name="score" placeholder="600">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p class="control-label " for="date">
+												Certification Date :
+											</p>
+											<input class="form-control mt-2" id="date" name="certificationDate" placeholder="MM/DD/YYYY" type="date" />
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Written:</p>
+											<input class="form-control mt-2" name="written" placeholder="8">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Listening :</p>
+											<input class="form-control mt-2" name="listening" placeholder="8">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Conversation :</p>
+											<input class="form-control mt-2" name="conversation" placeholder="8">
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Visiting Address on Insert -->
+	<div class="modal fade" id="addins" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="post" action="actaddins">
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Visiting Address</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Address Type</p>
+											<select class="form-control mt-2" name="addressType">
+												<option value="">Select</option>
+												@foreach($dropdownlist['addrtyp'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Community or Building</p>
+											<input class="form-control mt-2" placeholder="Kebayoran Residence" name="communityBuilding">
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<p>Street Name and Number:</p>
+											<textarea class="form-control mt-2" id="comment" name="streetName"
+												placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed iste dignissimos distinctio recusandae"></textarea>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<p>RT/RW</p>
+											<input class="form-control mt-2" name="rtRw" placeholder="54/54">
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<p>ZIP Code</p>
+											<input class="form-control mt-2" name="zipCode" placeholder="22312">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>District</p>
+											<input class="form-control mt-2" name="district" placeholder="Kebayoran Baru">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>City</p>
+											<input class="form-control mt-2" name="city" placeholder="Jakarta">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Country </p>
+											<input class="form-control mt-2" name="country" placeholder="Tangerang Selatan">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group ">
+											<label class="control-label " for="date">
+												From Date :
+											</label>
+											<input class="form-control mt-2" id="date" name="fromDate"
+												placeholder="MM/DD/YYYY" type="date" />
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group ">
+											<label class="control-label " for="date">
+												Until :
+											</label>
+											<input class="form-control mt-2" id="date" name="untilDate"
+												placeholder="MM/DD/YYYY" type="date" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Visiting Address on Edit -->
+	<div class="modal fade" id="addedt" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="POST" action="" id="frmaddedt">
+					@method('patch')
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Visiting Address</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Address Type</p>
+											<input type="hidden" name="indexadd" value="">
+											<select class="form-control mt-2" name="addressType">
+												<option value="">Select</option>
+												@foreach($dropdownlist['addrtyp'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Community or Building</p>
+											<input class="form-control mt-2" placeholder="Kebayoran Residence" name="communityBuilding">
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<p>Street Name and Number:</p>
+											<textarea class="form-control mt-2" id="comment" name="streetName"
+												placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed iste dignissimos distinctio recusandae"></textarea>
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<p>RT/RW</p>
+											<input class="form-control mt-2" name="rtRw" placeholder="54/54">
+										</div>
+									</div>
+									<div class="col-md-3">
+										<div class="form-group">
+											<p>ZIP Code</p>
+											<input class="form-control mt-2" name="zipCode" placeholder="22312">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>District</p>
+											<input class="form-control mt-2" name="district" placeholder="Kebayoran Baru">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>City</p>
+											<input class="form-control mt-2" name="city" placeholder="Jakarta">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Country </p>
+											<input class="form-control mt-2" name="country" placeholder="Tangerang Selatan">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group ">
+											<label class="control-label " for="date">
+												From Date :
+											</label>
+											<input class="form-control mt-2" id="date" name="fromDate"
+												placeholder="MM/DD/YYYY" type="date" />
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group ">
+											<label class="control-label " for="date">
+												Until :
+											</label>
+											<input class="form-control mt-2" id="date" name="untilDate"
+												placeholder="MM/DD/YYYY" type="date" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Sport on Insert -->
+	<div class="modal fade" id="sportins" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="post" action="actsportins">
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Sport</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Sport Name: </label>
+											<input name="sportName" placeholder="AeroModeling"
+												class="form-control mt-2" type="text">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Sport Certification:
+											</label>
+											<input name="sportCertification"
+												placeholder="City Council Permit" class="form-control mt-2"
+												type="text">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Certification Issuer:
+											</label>
+											<input name="certification_issuer" placeholder="City Of Ventura"
+												class="form-control mt-2" type="text">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="control-label " for="date">
+												Certification Date :
+											</label>
+											<input class="form-control mt-2" id="date" name="expiredDate" placeholder="MM/DD/YYYY" type="date" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Sport on Edit -->
+	<div class="modal fade" id="sportedt" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="POST" action="" id="frmsportedt">
+					@method('patch')
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Sport</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Sport Name: </label>
+											<input type="hidden" name="indexsport" value="">
+											<input name="sportName" placeholder="AeroModeling"
+												class="form-control mt-2" type="text">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Sport Certification:
+											</label>
+											<input name="sportCertification"
+												placeholder="City Council Permit" class="form-control mt-2"
+												type="text">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Certification Issuer:
+											</label>
+											<input name="certification_issuer" placeholder="City Of Ventura"
+												class="form-control mt-2" type="text">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label class="control-label " for="date">
+												Certification Date :
+											</label>
+											<input class="form-control mt-2" id="date" name="expiredDate" placeholder="MM/DD/YYYY" type="date" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Hobby on Insert -->
+	<div class="modal fade" id="hobbyins" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="post" action="acthobbyins">
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Hobby</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Hobby Name:</label>
+												<input type="text" name="nama" placeholder="AeroModeling" class="form-control mt-2">
+												@error('nama') <small class="text-danger">{{ $message }}</small> @enderror												
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Hobby Certification:
+											</label>
+												<input type="text" name="sertifikat" placeholder="City Council Permit" class="form-control mt-2">
+												@error('email') <small class="text-danger">{{ $message }}</small> @enderror
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Certification Issuer:
+											</label>
+												<input type="text" name="orgnama" placeholder="City Of Ventura" class="form-control mt-2">
+												@error('saran') <small class="text-danger">{{ $message }}</small> @enderror										
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="date">
+												Certification Date :
+											</label>
+											<input class="form-control mt-2" id="date" name="expiredDateedt" placeholder="MM/DD/YYYY" type="date" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Hobby on Edit -->
+	<div class="modal fade" id="hobbyedt" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="POST" action="" id="frmhobbyedt">
+					@method('patch')
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Hobby</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Hobby Name:</label>
+												<input type="hidden" name="indexhob" value="">
+												<input type="text" name="nama" placeholder="AeroModeling" class="form-control mt-2">
+												@error('nama') <small class="text-danger">{{ $message }}</small> @enderror												
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Hobby Certification:
+											</label>
+												<input type="text" name="sertifikat" placeholder="City Council Permit" class="form-control mt-2">
+												@error('email') <small class="text-danger">{{ $message }}</small> @enderror
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label>Certification Issuer:
+											</label>
+												<input type="text" name="orgnama" placeholder="City Of Ventura" class="form-control mt-2">
+												@error('saran') <small class="text-danger">{{ $message }}</small> @enderror										
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<label for="date">
+												Certification Date :
+											</label>
+											<input class="form-control mt-2" id="date" name="expiredDateedt" placeholder="MM/DD/YYYY" type="date" />
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Virtual Account on Insert -->
+	<div class="modal fade" id="virtins" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">					
+				<div class="modal-header">
+					<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Virtual Account</h1>
+				</div>
+				<div class="modal-body">
+					<div role="tabpanel">
+						<div class="row mt-3">
+							<div class="col-md-2 pr-0">
+								<h1 style="font-size: 19px; font-weight: 600;">Category :</h1>
+							</div>
+							<div class="col-md-10 pl-0 mt-1">
+								<div class="form-group">
+									<input type="radio" checked onclick="javascript:virtins();" name="virtins" id="bankingins">
+									<label class="mr-3">Banking</label>
+									<input type="radio" onclick="javascript:virtins();" name="virtins" id="viraccountins">
+									<label class="mr-3">Virtual Account</label>
+								</div>
+							</div>
+						</div>
+						<div id="ifBanking" style="display:block">
+							<form action="actbankins" method="post">
+								@csrf
+								<div class="btn-modal">
+									<div class="mb-1">
+										<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+									</div>
+									<div>
+										<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Bank Name :</p>
+											<input class="form-control mt-2" name="nama" placeholder="Bank Mandiri">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Currency :</p>
+											<input class="form-control mt-2" name="currency" placeholder="IDR">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Account Nr. :</p>
+											<input class="form-control mt-2" name="account" placeholder="3435.565.432.343">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Account Holder Name :</p>
+											<input class="form-control mt-2" name="holder" placeholder="Jhon G Doe ">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Routing Nr. or Swift :</p>
+											<input class="form-control mt-2" name="routing" placeholder="343556343">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Verification Status :</p>
+											<input type="text" name="status" placeholder="verified" class="form-control mt-2">								
+										</div>										
+									</div>
+									<div class="col-md-12">
+										<h4 class="text-danger">Your Bank Account is subject to Verification and
+											validation</h4>
+										<div class="form-group">
+											<p>1. The name appears at account Holder name
+												must be
+												the same as at axara user account name <br>
+												2. All AXARA payouts are made through validate bank account</p>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>	
+						<div id="ifVirAccount" style="display:none">
+							<form action="actvirtins" method="post">
+								@csrf
+								<div class="btn-modal">
+									<div class="mb-1">
+										<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+									</div>
+									<div>
+										<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Fintech Provider :</p>
+											<input class="form-control mt-2" name="provider" placeholder="Linkaja">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Fintech Virtual Account Nr:</p>
+											<input class="form-control mt-2" name="account" placeholder="57465743">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Fintech Currency :</p>
+											<input class="form-control mt-2" name="currency" placeholder="IDR">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Verification Status :</p>
+											<input class="form-control mt-2" name="status" placeholder="verified">
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<h2 class="text-danger">Cashless Emoney is not subject to verification</h2>
+											<p><b>No AXARA payout will be made through
+												Cashless Emoney account</b></p>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>			
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Virtual Account on Edit -->
+	<div class="modal fade" id="virtedt" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">					
+				<div class="modal-header">
+					<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Virtual Account</h1>
+				</div>
+				<div class="modal-body">
+					<div role="tabpanel">
+						<div class="row mt-3">
+							<div class="col-md-2 pr-0">
+								<h1 style="font-size: 19px; font-weight: 600;">Category :</h1>
+							</div>
+							<div class="col-md-10 pl-0 mt-1">
+								<div class="form-group">
+									<input type="radio" checked onclick="javascript:virtedt();" name="virtedt" id="bankingedt">
+									<label class="mr-3">Banking</label>
+									<input type="radio" onclick="javascript:virtedt();" name="virtedt" id="viraccountedt">
+									<label class="mr-3">Virtual Account</label>
+								</div>
+							</div>
+						</div>
+						<div id="ifBankingedt" style="display:block">
+							<form action="" method="post" id="frmbankedt">
+								@method('patch')
+								@csrf
+								<div class="btn-modal">
+									<div class="mb-1">
+										<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+									</div>
+									<div>
+										<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Bank Name :</p>
+											<input type="hidden" name="indexbank">
+											<input class="form-control mt-2" name="nama" placeholder="Bank Mandiri">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Currency :</p>
+											<input class="form-control mt-2" name="currency" placeholder="IDR">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Account Nr. :</p>
+											<input class="form-control mt-2" name="account" placeholder="3435.565.432.343">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Account Holder Name :</p>
+											<input class="form-control mt-2" name="holder" placeholder="Jhon G Doe ">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Routing Nr. or Swift :</p>
+											<input class="form-control mt-2" name="routing" placeholder="343556343">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Verification Status :</p>
+											<input type="text" name="status" placeholder="verified" class="form-control mt-2">								
+										</div>										
+									</div>
+									<div class="col-md-12">
+										<h4 class="text-danger">Your Bank Account is subject to Verification and
+											validation</h4>
+										<div class="form-group">
+											<p>1. The name appears at account Holder name
+												must be
+												the same as at axara user account name <br>
+												2. All AXARA payouts are made through validate bank account</p>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>	
+						<div id="ifVirAccountedt" style="display:none">
+							<form action="" id="frmfinedt" method="post">
+								@method('patch')
+								@csrf
+								<div class="btn-modal">
+									<div class="mb-1">
+										<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+									</div>
+									<div>
+										<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Fintech Provider :</p>
+											<input type="hidden" name="indexfin">
+											<input class="form-control mt-2" name="provider" placeholder="Linkaja">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Fintech Virtual Account Nr:</p>
+											<input class="form-control mt-2" name="account" placeholder="57465743">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Fintech Currency :</p>
+											<input class="form-control mt-2" name="currency" placeholder="IDR">
+										</div>
+									</div>
+									<div class="col-md-6">
+										<div class="form-group">
+											<p>Verification Status :</p>
+											<input class="form-control mt-2" name="status" placeholder="verified">
+										</div>
+									</div>
+									<div class="col-md-12">
+										<div class="form-group">
+											<h2 class="text-danger">Cashless Emoney is not subject to verification</h2>
+											<p><b>No AXARA payout will be made through
+												Cashless Emoney account</b></p>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>			
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Civilization on Insert -->
+	<div class="modal fade" id="civilins" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">					
+				<div class="modal-header">
+					<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Civilization</h1>
+				</div>
+				<div class="modal-body">
+					<div role="tabpanel">
+						<div class="row mt-3">
+							<div class="col-md-2 pr-0">
+								<h1 style="font-size: 19px; font-weight: 600;">Category :</h1>
+							</div>
+							<div class="col-md-10 pl-0 mt-1">
+								<div class="form-group">
+									<input type="radio" checked onclick="javascript:civil();" name="civilins"  id="passport">
+									<label class="mr-3">Passport</label>
+									<input type="radio" onclick="javascript:civil();" name="civilins" id="idcard">
+									<label class="mr-3">ID Card</label>
+									<input type="radio" onclick="javascript:civil();" name="civilins" id="driver">
+									<label class="mr-3">Driver License</label>
+									<input type="radio" onclick="javascript:civil();" name="civilins" id="tax">
+									<label class="mr-3">Tax ID</label>
+								</div>
+							</div>
+						</div>
+						<div id="ifPassport" style="display:block">
+							<form action="actpassings" method="post">
+								@csrf
+								<div class="btn-modal">
+									<div class="mb-1">
+										<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+									</div>
+									<div>
+										<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Passport No</p>
+											<input class="form-control mt-2" name="passportNo" placeholder="13672324343498">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Expired Date :</p>
+											<input class="form-control mt-2" id="date" name="expiredDate" placeholder="MM/DD/YYYY" type="date" />
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Nationality</p>
+											<select class="form-control mt-2" name="pas_id_dropdown_natnty">
+												<option value="">Select</option>
+												@foreach($dropdownlist['natnty'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div id="ifID" style="display:none">
+							<form action="actcardins" method="post">
+								@csrf
+								<div class="btn-modal">
+									<div class="mb-1">
+										<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+									</div>
+									<div>
+										<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>ID Card No</p>
+											<input class="form-control mt-2" name="idCard" placeholder="13672324343498">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Expired Date :</p>
+											<input class="form-control mt-2" id="date" name="expiredDate" placeholder="MM/DD/YYYY" type="date" />
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Nationality</p>
+											<select class="form-control mt-2" name="nationality">
+												<option value="">Select</option>
+												@foreach($dropdownlist['natnty'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div id="ifDriver" style="display:none">
+							<form action="actdrivins" method="post">
+								@csrf
+								<div class="btn-modal">
+									<div class="mb-1">
+										<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+									</div>
+									<div>
+										<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Driving License No</p>
+											<input class="form-control mt-2" name="driverLicenseNo" placeholder="13672324343498">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Expired Date :</p>
+											<input class="form-control mt-2" id="date" name="expiredDate" placeholder="MM/DD/YYYY" type="date" />
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Nationality</p>
+											<select class="form-control mt-2" name="driverLicenseType">
+												<option value="">Select</option>
+												@foreach($dropdownlist['natnty'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div id="ifTax" style="display:none">
+							<form action="acttaxins" method="post">
+								@csrf
+								<div class="btn-modal">
+									<div class="mb-1">
+										<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+									</div>
+									<div>
+										<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Tax ID No</p>
+											<input class="form-control mt-2" name="taxId" placeholder="13672324343498">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Expired Date :</p>
+											<input class="form-control mt-2" id="date" name="expiredDate" placeholder="MM/DD/YYYY" type="date" />
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Nationality</p>
+											<select class="form-control mt-2" name="tax_id_dropdown_natnty">
+												<option value="">Select</option>
+												@foreach($dropdownlist['natnty'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Civilization on Edit -->
+	<div class="modal fade" id="civiledt" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">					
+				<div class="modal-header">
+					<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Civilization</h1>
+				</div>
+				<div class="modal-body">
+					<div role="tabpanel">
+						<div class="row mt-3">
+							<div class="col-md-2 pr-0">
+								<h1 style="font-size: 19px; font-weight: 600;">Category :</h1>
+							</div>
+							<div class="col-md-10 pl-0 mt-1">
+								<div class="form-group">
+									<input type="radio" checked onclick="javascript:civiledt();" name="civil" id="passportedt">
+									<label class="mr-3">Passport</label>
+									<input type="radio" onclick="javascript:civiledt();" name="civil" id="idcardedt">
+									<label class="mr-3">ID Card</label>
+									<input type="radio" onclick="javascript:civiledt();" name="civil" id="driveredt">
+									<label class="mr-3">Driver License</label>
+									<input type="radio" onclick="javascript:civiledt();" name="civil" id="taxedt">
+									<label class="mr-3">Tax ID</label>
+								</div>
+							</div>
+						</div>
+						<div id="ifPassportedt" style="display:block">
+							<form action="" id="frmpassedt" method="post">
+								@method('patch')
+								@csrf
+								<div class="btn-modal">
+									<div class="mb-1">
+										<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+									</div>
+									<div>
+										<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Passport No</p>
+											<input type="hidden" name="indexpass">
+											<input class="form-control mt-2" name="passportNo" placeholder="13672324343498">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Expired Date :</p>
+											<input class="form-control mt-2" id="date" name="expiredDate" placeholder="MM/DD/YYYY" type="date" />
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Nationality</p>
+											<select class="form-control mt-2" name="pas_id_dropdown_natnty">
+												<option value="">Select</option>
+												@foreach($dropdownlist['natnty'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div id="ifIDedt" style="display:none">
+							<form action="" id="frmidedt" method="post">
+								@method('patch')
+								@csrf
+								<div class="btn-modal">
+									<div class="mb-1">
+										<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+									</div>
+									<div>
+										<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>ID Card No</p>
+											<input type="hidden" name="indexid">
+											<input class="form-control mt-2" name="idCard" placeholder="13672324343498">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Expired Date :</p>
+											<input class="form-control mt-2" id="date" name="expiredDate" placeholder="MM/DD/YYYY" type="date" />
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Nationality</p>
+											<select class="form-control mt-2" name="idc_id_dropdown_natnty">
+												<option value="">Select</option>
+												@foreach($dropdownlist['natnty'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div id="ifDriveredt" style="display:none">
+							<form action="" id="frmdrivedt" method="post">
+								@method('patch')
+								@csrf
+								<div class="btn-modal">
+									<div class="mb-1">
+										<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+									</div>
+									<div>
+										<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Driving License No</p>
+											<input type="hidden" name="indexlic">
+											<input class="form-control mt-2" name="driverLicenseNo" placeholder="13672324343498">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Expired Date :</p>
+											<input class="form-control mt-2" id="date" name="expiredDate" placeholder="MM/DD/YYYY" type="date" />
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Nationality</p>
+											<select class="form-control mt-2" name="dri_id_dropdown_drvlic">
+												<option value="">Select</option>
+												@foreach($dropdownlist['natnty'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>
+						<div id="ifTaxedt" style="display:none">
+							<form action="" id="frmtaxedt" method="post">
+								@method('patch')
+								@csrf
+								<div class="btn-modal">
+									<div class="mb-1">
+										<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+									</div>
+									<div>
+										<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+									</div>
+								</div>
+								<div class="row">
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Tax ID No</p>
+											<input type="hidden" name="indextax">
+											<input class="form-control mt-2" name="taxId" placeholder="13672324343498">
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Expired Date :</p>
+											<input class="form-control mt-2" id="date" name="expiredDate" placeholder="MM/DD/YYYY" type="date" />
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="form-group">
+											<p>Nationality</p>
+											<select class="form-control mt-2" name="tax_id_dropdown_natnty">
+												<option value="">Select</option>
+												@foreach($dropdownlist['natnty'] as $x)
+													<option value="{{ $x['id_dropdown'] }}">{{ $x['namedropdown'] }}</option>
+												@endforeach
+											</select>
+										</div>
+									</div>
+								</div>
+							</form>
+						</div>						
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Additional on Insert -->
+	<div class="modal fade" id="infoins" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="post" action="actinfoins">
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Additional Information</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for="">Additional Information</label>
+											<textarea class="form-control mt-2" rows="4" id="comment" name="additional_info"
+												placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed iste dignissimos distinctio recusandae"></textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal Additional on Edit -->
+	<div class="modal fade" id="infoedt" tabindex="-1" role="dialog" aria-hidden="true" style="padding-right: 40px;">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<form method="POST" action="" id="frminfoedt">
+					@method('patch')
+					@csrf
+					<div class="btn-modal">
+						<div class="mb-1">
+							<button type="submit" href="#" style="width: 45px;" class="btn btn-primary"><i class="fas fa-save"></i></button>					
+						</div>
+						<div>
+							<button type="button" style="width: 45px;" class="btn btn-danger" data-dismiss="modal" aria-label="Close"><i class="fas fa-times"></i></button>
+						</div>
+					</div>
+					<div class="modal-header">
+						<h1 class="modal-title text-primary" style="font-size: 20px; font-weight: 600;" id="myModalLabel">Additional Information</h1>
+					</div>
+					<div class="modal-body">
+						<div role="tabpanel">
+							<!-- Tab panes -->
+							<div class="tab-content mt-4">
+								<div class="row">
+									<div class="col-md-12">
+										<div class="form-group">
+											<label for="">Additional Information</label>
+											<input type="hidden" name="indexinfo" value="">
+											<textarea class="form-control mt-2" rows="4" id="comment" name="additional_infoedt"
+												placeholder="Lorem ipsum, dolor sit amet consectetur adipisicing elit. Sed iste dignissimos distinctio recusandae"></textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</form>								
+			</div>
+		</div>
+	</div>
+
+
+<script type="text/javascript">
+	function virtins() {
+		if (document.getElementById('bankingins').checked) {
+			document.getElementById('ifBanking').style.display = 'block';
+			document.getElementById('ifVirAccount').style.display = 'none';
+		} else if (document.getElementById('viraccountins').checked) {
+			document.getElementById('ifBanking').style.display = 'none';
+			document.getElementById('ifVirAccount').style.display = 'block';
+		}
+	}
+
+	function virtedt() {
+		if (document.getElementById('bankingedt').checked) {
+			document.getElementById('ifBankingedt').style.display = 'block';
+			document.getElementById('ifVirAccountedt').style.display = 'none';
+		} else if (document.getElementById('viraccountedt').checked) {
+			document.getElementById('ifBankingedt').style.display = 'none';
+			document.getElementById('ifVirAccountedt').style.display = 'block';
+		}
+	}
+
+	function civil() {
+		if (document.getElementById('passport').checked) {
+			document.getElementById('ifPassport').style.display = 'block';
+			document.getElementById('ifID').style.display = 'none';
+			document.getElementById('ifDriver').style.display = 'none';
+			document.getElementById('ifTax').style.display = 'none';
+		} else if (document.getElementById('idcard').checked) {
+			document.getElementById('ifPassport').style.display = 'none';
+			document.getElementById('ifID').style.display = 'block';
+			document.getElementById('ifDriver').style.display = 'none';
+			document.getElementById('ifTax').style.display = 'none';
+		} else if (document.getElementById('driver').checked) {
+			document.getElementById('ifPassport').style.display = 'none';
+			document.getElementById('ifID').style.display = 'none';
+			document.getElementById('ifDriver').style.display = 'block';
+			document.getElementById('ifTax').style.display = 'none';
+		} else if (document.getElementById('tax').checked) {
+			document.getElementById('ifPassport').style.display = 'none';
+			document.getElementById('ifID').style.display = 'none';
+			document.getElementById('ifDriver').style.display = 'none';
+			document.getElementById('ifTax').style.display = 'block';
+		}
+	}
+
+	function civiledt() {
+		if (document.getElementById('passportedt').checked) {
+			document.getElementById('ifPassportedt').style.display = 'block';
+			document.getElementById('ifIDedt').style.display = 'none';
+			document.getElementById('ifDriveredt').style.display = 'none';
+			document.getElementById('ifTaxedt').style.display = 'none';
+		} else if (document.getElementById('idcardedt').checked) {
+			document.getElementById('ifPassportedt').style.display = 'none';
+			document.getElementById('ifIDedt').style.display = 'block';
+			document.getElementById('ifDriveredt').style.display = 'none';
+			document.getElementById('ifTaxedt').style.display = 'none';
+		} else if (document.getElementById('driveredt').checked) {
+			document.getElementById('ifPassportedt').style.display = 'none';
+			document.getElementById('ifIDedt').style.display = 'none';
+			document.getElementById('ifDriveredt').style.display = 'block';
+			document.getElementById('ifTaxedt').style.display = 'none';
+		} else if (document.getElementById('taxedt').checked) {
+			document.getElementById('ifPassportedt').style.display = 'none';
+			document.getElementById('ifIDedt').style.display = 'none';
+			document.getElementById('ifDriveredt').style.display = 'none';
+			document.getElementById('ifTaxedt').style.display = 'block';
+		}
+	}
+</script>
+<script type="text/javascript" src="js/jquery.min.js"></script>
+<script type="text/javascript" src="js/popper.js"></script>
+<script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/jquery.mCustomScrollbar.js"></script>
+<script type="text/javascript" src="lib/slick/slick.min.js"></script>
+<script type="text/javascript" src="js/scrollbar.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
+
+</body>
+</html>
